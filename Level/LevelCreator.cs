@@ -9,7 +9,7 @@ public class LevelCreator : MonoBehaviour
     //todo: add new chance system
     public Transform player;
 
-    public List<GameObject> objectList = new List<GameObject>();
+    public List<GameObject> createdObjects = new List<GameObject>();
     public GameObject floorPrefab;
     public GameObject collectableCubePrefab;
     public GameObject barrierPrefab;
@@ -29,44 +29,35 @@ public class LevelCreator : MonoBehaviour
     private void FloorCreation(){
         floorLength = Random.Range(150f, 200.0f);
         floorWidth = 10f;
-        var floorPosition = new Vector3(0, 0, floorLength*player.transform.position.z-10);
-        GameObject floor = Instantiate (floorPrefab, floorPosition, Quaternion.identity, floorPrefab.transform.parent);
+        var floorPosition = new Vector3(0, 0, floorLength*.5f-10);
+        GameObject floor = Instantiate (floorPrefab, floorPosition, Quaternion.identity);
         SetParentGenerator(floor);
         floor.transform.localScale = new Vector3(floorWidth, 1, floorLength);
     }
 
     private void BlockCreation(){
-        if (objectList.Count != 0){
-            if(objectList[objectList.Count-1].transform.position.z > finishLinePosition.z-20f){
-                return;
-            }else{
-                if(Random.value < 0.5f){
-                    Collectables();
-                }else{
-                    Barriers();
-                }
-            }
-        }else{
+        if (createdObjects[createdObjects.Count-1].transform.position.z > finishLinePosition.z-20f){
+            return;
+        }
+        if(Random.value<0.75f){
             Collectables();
+        }else{
+            Barriers();
         }
     }
     private void Collectables(){
-        if(objectList.Count != 0){
-            GameObject objects = Instantiate (collectableCubePrefab, new Vector3(Random.Range(-4.5f, 4.5f),1,Random.Range(5f, 10f)+objectList[objectList.Count-1].transform.position.z+5f), Quaternion.identity);
-            SetParentGenerator(objects);
-            objectList.Add(objects);
-        }else{
-            GameObject objects = Instantiate (collectableCubePrefab, new Vector3(Random.Range(-4.5f, 4.5f),1,Random.Range(5f, 10f)+player.position.z+5f), Quaternion.identity);
-            SetParentGenerator(objects);
-            objectList.Add(objects);
-            
-        }
+        GameObject objects = Instantiate (collectableCubePrefab, new Vector3(Random.Range(-4.5f, 4.5f),1,Random.Range(5f, 10f)+createdObjects[createdObjects.Count-1].transform.position.z+5f), Quaternion.identity);
+        SetParentGenerator(objects);
+        createdObjects.Add(objects);
         BlockCreation();
     }
     private void Barriers(){
-        GameObject objects = Instantiate (barrierPrefab, new Vector3(0,1,Random.Range(5f, 10f)+objectList[objectList.Count-1].transform.position.z+5f), Quaternion.identity);
+        if (createdObjects[createdObjects.Count-1].tag == "Barrier"){
+            return;
+        }
+        GameObject objects = Instantiate (barrierPrefab, new Vector3(0,1,Random.Range(5f, 10f)+createdObjects[createdObjects.Count-1].transform.position.z+5f), Quaternion.identity);
         SetParentGenerator(objects);
-        objectList.Add(objects);
+        createdObjects.Add(objects);
         BlockCreation();
     }
     
