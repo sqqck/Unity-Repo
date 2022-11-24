@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollectableManager : MonoBehaviour
 {
-    //todo: reoptimize script
-    //todo: add new finish event
     public List<GameObject> blockList = new List<GameObject>();
     [SerializeField] private ScoreManager scoreManager;
     private GameObject lastBlockObject;
@@ -23,6 +22,10 @@ public class CollectableManager : MonoBehaviour
         UpdateBlockList();
     }
     public void DecreaseBlockStack(GameObject go){
+        if(blockList.Count == 1){
+            Finished();
+            return;
+        }
         go.transform.parent = null;
         scoreManager.RemoveScore();
         blockList.Remove(go);
@@ -32,6 +35,7 @@ public class CollectableManager : MonoBehaviour
         lastBlockObject = blockList[blockList.Count -1];
     }
     public void Finished(){
-        print(scoreManager.GetScore());
+        RestartLevel.Score = scoreManager.GetScore();
+        SceneManager.LoadScene(1);
     }
 }
