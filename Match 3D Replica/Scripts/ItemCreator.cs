@@ -9,12 +9,13 @@ public class ItemCreator : MonoBehaviour
     {
         for (int n = 0; n<(ItemList.Count);n++){
             for(int m = 0; m<2;m++){
-                GameObject item = Instantiate(ItemList[n],new Vector3(Random.Range(-3,3),Random.Range(1,2),Random.Range(-4,5)),new Quaternion(Random.Range(1,5),Random.Range(1,5),Random.Range(1,5),Random.Range(1,5)));
-                item.transform.parent = this.transform;
-                item.AddComponent<Items>();
-                item.AddComponent<Rigidbody>();
-                item.name = ItemList[n].name;
+                ItemCreation(ItemList[n].gameObject);
             }
         }
+    }
+    public void ItemCreation(GameObject _obj){
+        GameObject item = Instantiate(_obj,new Vector3(Random.Range(-3,3),Random.Range(1,2),Random.Range(-4,5)),new Quaternion(Random.Range(1,5),Random.Range(1,5),Random.Range(1,5),Random.Range(1,5)));
+        item.transform.parent = this.transform;
+        item.name = _obj.name;
     }
 }
