@@ -2,9 +2,11 @@ These projects are made for educational purposes. If you encounter a problem or 
 ### Links
   - [Cube Surfer](#cube-surfer)
   - [Match 3D](#match3d)
+  - [2D Idle Store Game](#2d-idle-store-game)
 
 ### Cube Surfer
   - [Repo Folder Link](/Cube%20Surfer%20Replica)
+  - [In Game Picture](/Cube%20Surfer%20Replica/ingame.png)
   - Needed Stuffs
     - [Player](/Cube%20Surfer%20Replica/Player)
     - [Camera](/Cube%20Surfer%20Replica/Camera)
@@ -16,8 +18,14 @@ These projects are made for educational purposes. If you encounter a problem or 
         - [Barrier](/Cube%20Surfer%20Replica/Trigger)
 ### Match3D
   - [Repo Folder Link](/Match%203D%20Replica/Scripts)
+  - [In Game Picture](/Match%203D%20Replica/ingame.png)
   - Needed Stuffs
     - [Empty Game Object for Item creation](/Match%203D%20Replica/Scripts/ItemCreator.cs)
     - [Match Cube with 2 empty transform (left and right sides)](/Match%203D%20Replica/Scripts/ItemMatchManager.cs)
     - [Items what you want match](/Match%203D%20Replica/Scripts/Items.cs)
-    - Camera
+### 2D Idle Store Game
+  - [Repo Folder Link](/2D%20Store%20Idle%20Game)
+  - [In Game Picture](/2D%20Store%20Idle%20Game/ingame.png)
+  - Needed Stuffs
+    - [Empty Game Object for GameManager](/2D%20Store%20Idle%20Game/GameManager.cs)
+    - [Store Panels](/2D%20Store%20Idle%20Game/storepanels.png)
